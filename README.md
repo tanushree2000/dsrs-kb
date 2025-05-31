@@ -88,3 +88,43 @@ If you want to run everything on your local machine or in another environment in
    ```bash
    git clone https://github.com/your‐username/dsrs-kb.git
    cd dsrs-kb
+Install Python dependencies
+
+bash
+Copy
+Edit
+pip install requests beautifulsoup4 pandas
+Run the refresh script
+
+bash
+Copy
+Edit
+python refresh_dsrs_kb.py
+This will produce or overwrite:
+
+dsrs_sections.csv
+
+dsrs_internships.csv
+
+dsrs_services.csv
+
+dsrs_consulting.csv
+
+dsrs_kb.db (SQLite database)
+
+Open the CSVs
+
+You can open any CSV in a spreadsheet program or load them in a notebook to inspect the latest data.
+
+To explore the SQLite database:
+
+bash
+Copy
+Edit
+sqlite3 dsrs_kb.db
+sqlite> .tables
+sqlite> SELECT * FROM Category LIMIT 5;
+sqlite> SELECT * FROM Item LIMIT 5;
+Inspect the Colab notebook
+If you prefer an interactive environment with visualizations, open this link in your browser and run the cells:
+DSRS KB Colab Notebook
