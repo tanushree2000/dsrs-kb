@@ -111,7 +111,7 @@ Keeping this knowledge base fresh and accurate is critical. My plan for maintena
 
 ## GitHub Actions
 
-* The workflow is scheduled to run every Monday at nine AM Central Time using a cron schedule in the YAML file.
+* The workflow is scheduled to run every Monday at 9 AM Central Time using a cron schedule in the YAML file.
 * It is also possible to trigger the workflow manually by clicking the Run workflow button under the Actions tab for Weekly DSRS KB Refresh in this repository.
 * When the workflow runs, it will check out the repository, install dependencies, run `refresh_dsrs_kb.py`, and then commit any changed CSV files or the database back to the repo.
 
