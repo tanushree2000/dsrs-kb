@@ -71,7 +71,7 @@ Keeping this knowledge base fresh and accurate is critical. My plan for maintena
      ```
      Weekly KB refresh: YYYY-MM-DD
      ```  
-   - You can glance at the Git history to see exactly when content changed. If a new internship area appears, you’ll see an additional row in `dsrs_internships.csv` compared to the previous snapshot.
+   - You can glance at the Git history to see exactly when the content changed. If a new internship area appears, you will see an additional row in `dsrs_internships.csv` compared to the previous snapshot.
 
 4. **Adding New Information**  
    - If DSRS creates new categories—say, a “News” page—someone can write a new function in `refresh_dsrs_kb.py` (for example, `fetch_news()`) that collects headlines, dates, and URLs into a new DataFrame and writes `dsrs_news.csv`. Then update the database‐loading logic to insert those news items into a new `News` table.  
@@ -81,50 +81,28 @@ Keeping this knowledge base fresh and accurate is critical. My plan for maintena
    - DSRS staff could add a link on their website footer saying “View Knowledge Base Archive.” That link would point to a static GitHub Pages site generated from the CSVs (or a lightweight Flask app that reads from `dsrs_kb.db`).  
    - For AI projects, the `Item` and `Category` tables can be ingested into a datastore (like Pinecone or Elasticsearch) to support natural language search. Each row’s timestamp allows analysts to filter strictly for recently added services.
 
+
 ## How to Run Locally
-If you want to run everything on your local machine or in another environment instead of GitHub Actions:
 
-1. **Clone this repository**  
-   ```bash
-   git clone https://github.com/your‐username/dsrs-kb.git
-   cd dsrs-kb
-Install Python dependencies
+1. Install the required Python packages by running:
 
-bash
-Copy
-Edit
-pip install requests beautifulsoup4 pandas
-Run the refresh script
+   ```
+   pip install requests beautifulsoup4 pandas
+   ```
+2. Run the script:
 
-bash
-Copy
-Edit
-python refresh_dsrs_kb.py
-This will produce or overwrite:
+   ```
+   python refresh_dsrs_kb.py
+   ```
 
-dsrs_sections.csv
+   This command will recreate `dsrs_sections.csv`, `dsrs_internships.csv`, `dsrs_services.csv`, `dsrs_consulting.csv` and `dsrs_kb.db` in your current directory You can open these files or explore `dsrs_kb.db` with any sqlite client
 
-dsrs_internships.csv
+## GitHub Actions
 
-dsrs_services.csv
+* The workflow is scheduled to run each Monday at 9 AM Central Time using a cron schedule in the yaml file
+* You can also trigger the workflow manually by clicking the Run workflow button under the Actions tab for “Weekly DSRS KB Refresh” in this repository
+* When the workflow runs it will checkout this repository install dependencies run `refresh_dsrs_kb.py` and then commit any changed csv files or database back to the repo
 
-dsrs_consulting.csv
+## Contact
 
-dsrs_kb.db (SQLite database)
-
-Open the CSVs
-
-You can open any CSV in a spreadsheet program or load them in a notebook to inspect the latest data.
-
-To explore the SQLite database:
-
-bash
-Copy
-Edit
-sqlite3 dsrs_kb.db
-sqlite> .tables
-sqlite> SELECT * FROM Category LIMIT 5;
-sqlite> SELECT * FROM Item LIMIT 5;
-Inspect the Colab notebook
-If you prefer an interactive environment with visualizations, open this link in your browser and run the cells:
-DSRS KB Colab Notebook
+If you have any questions or need more information feel free to open an issue in this repository.
